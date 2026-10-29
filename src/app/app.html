@@ -1,0 +1,378 @@
+<div class="min-h-screen bg-[#0b0f17] text-slate-100 flex flex-col relative overflow-x-hidden">
+  
+  <!-- 3-Second Cyber Introduction Overlay -->
+  <app-cyber-intro></app-cyber-intro>
+
+  <!-- Ambient Backdrop Image with Measured Dark Scrim -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <img 
+      src="/assets/images/cyber_datacore_matrix_1791885440583.jpg" 
+      alt="Matriz de Servidores Corporativos"
+      referrerpolicy="no-referrer"
+      class="w-full h-full object-cover opacity-20 filter blur-xs"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0b0f17]/90 via-[#0b0f17]/95 to-[#0b0f17]"></div>
+    <div class="absolute inset-0 cyber-bg-grid opacity-25"></div>
+  </div>
+
+  <!-- ENCABEZADO TÁCTICO UNIFICADO: BARRA DE MENÚ Y PORTADA AJUSTADAS AL MISMO ANCHO Y MARCO -->
+  <header class="relative z-20 w-full max-w-5xl mx-auto px-2 sm:px-4 pt-2 md:pt-4 select-none">
+    <div class="rounded-2xl sm:rounded-3xl overflow-hidden border border-cyan-500/30 bg-[#0d1117]/98 shadow-[0_0_35px_rgba(0,229,255,0.18)] backdrop-blur transition-all duration-300 flex flex-col">
+      
+      <!-- Barra del Menú (Ajustada exactamente al contorno de la portada) -->
+      <app-cyber-hud></app-cyber-hud>
+
+      <!-- Portada Oficial de Cifraflow (Ajustada directamente bajo la barra del menú) -->
+      <div class="border-t border-cyan-500/20 bg-slate-900/90 flex flex-col">
+        
+        <!-- Barra de Control de la Portada -->
+        <div class="p-2.5 px-3 sm:px-4 bg-slate-900/95 flex items-center justify-between gap-2 text-xs font-mono">
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <mat-icon class="text-cyan-400 text-sm">all_inclusive</mat-icon>
+            <span class="font-bold text-white tracking-wider uppercase text-[10px] sm:text-xs">
+              PORTADA OFICIAL · CIFRA FLOW FINANCIERO: TEORÍA DE JUEGOS
+            </span>
+            <span class="hidden sm:inline text-cyan-400/80 text-[10px] bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/30">
+              EQUILIBRIO DE NASH
+            </span>
+          </div>
+
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <!-- Botón Ver Matriz de Nash -->
+            <button
+              (click)="engine.showingNashMatrixModal.set(true)"
+              class="flex items-center gap-1 text-[11px] font-bold text-emerald-300 hover:text-white px-2.5 py-1 rounded bg-emerald-950/70 border border-emerald-400/50 hover:bg-emerald-900/70 transition-colors cursor-pointer shadow-sm"
+              title="Ver Matriz de Pagos de Teoría de Juegos y Equilibrio de Nash">
+              <mat-icon class="text-xs text-emerald-400">table_chart</mat-icon>
+              <span>Matriz Nash (2×2)</span>
+            </button>
+
+            <!-- Botón Ver Intro 3s -->
+            <button
+              (click)="engine.startIntro()"
+              class="flex items-center gap-1 text-[11px] text-cyan-300 hover:text-white px-2 py-1 rounded bg-cyan-950/50 border border-cyan-500/40 hover:bg-cyan-900/60 transition-colors cursor-pointer"
+              title="Reproducir introducción de 3 segundos">
+              <mat-icon class="text-xs text-cyan-400">play_circle</mat-icon>
+              <span>Intro (3s)</span>
+            </button>
+
+            <!-- Botón Ampliar Pantalla Completa -->
+            <button
+              (click)="engine.showingCoverModal.set(true)"
+              class="flex items-center gap-1 text-[11px] text-cyan-300 hover:text-white px-2 py-1 rounded bg-cyan-950/40 border border-cyan-500/30 hover:bg-cyan-900/50 transition-colors cursor-pointer"
+              title="Ver portada en pantalla completa">
+              <mat-icon class="text-xs">fullscreen</mat-icon>
+              <span class="hidden sm:inline">Ampliar</span>
+            </button>
+
+            <!-- Botón Minimizar/Expandir Portada -->
+            <button
+              (click)="engine.coverBannerExpanded.set(!engine.coverBannerExpanded())"
+              class="flex items-center gap-1 text-[11px] text-slate-400 hover:text-cyan-300 px-2 py-1 rounded hover:bg-slate-800 transition-colors cursor-pointer"
+              [title]="engine.coverBannerExpanded() ? 'Minimizar Portada' : 'Mostrar Portada'">
+              <span>{{ engine.coverBannerExpanded() ? 'Ocultar' : 'Mostrar' }}</span>
+              <mat-icon class="text-xs">{{ engine.coverBannerExpanded() ? 'expand_less' : 'expand_more' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cuerpo de la Portada Oficial con Imagen de Alta Resolución de CIFRA FLOW FINANCIERO -->
+        @if (engine.coverBannerExpanded()) {
+          <div class="relative w-full aspect-[21/9] sm:aspect-[16/7] md:aspect-[16/5.8] overflow-hidden group border-t border-cyan-500/15">
+            <img 
+              src="/assets/images/cifraflow_financiero_cover.jpg" 
+              alt="Portada Oficial Cifraflow Financiero: Teoría de Juegos"
+              referrerpolicy="no-referrer"
+              class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-102"
+            />
+            
+            <!-- Atmospheric Cyber Gradient Scrim -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-[#0b0f17]/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0b0f17]/85 via-[#0b0f17]/30 to-transparent"></div>
+
+            <!-- Overlay Content & Quick CTA -->
+            <div class="absolute bottom-3 left-4 right-4 flex items-end justify-between gap-4">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-mono text-cyan-300 bg-cyan-950/90 border border-cyan-400/50 px-2 py-0.5 rounded tracking-widest uppercase font-bold">
+                    TEORÍA DE JUEGOS FINANCIERA
+                  </span>
+                  <span class="text-[10px] font-mono text-emerald-300 hidden sm:inline bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">
+                    · Equilibrio de Nash & Mercados
+                  </span>
+                </div>
+                <h2 class="text-lg sm:text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-md">
+                  CIFRA FLOW FINANCIERO
+                </h2>
+                <p class="text-xs text-slate-200 max-w-xl hidden sm:block drop-shadow">
+                  Aplica la Teoría de Juegos al flujo de capitales: canaliza activos legítimos hacia la Bóveda Central y desvía derivados tóxicos y ataques especulativos a la Cámara de Compensación.
+                </p>
+              </div>
+
+              <!-- Quick Action Buttons -->
+              <div class="flex items-center gap-2 shrink-0">
+                <button
+                  (click)="engine.showingNashMatrixModal.set(true)"
+                  class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold font-mono bg-emerald-950/90 hover:bg-emerald-900 border border-emerald-400/60 text-emerald-300 transition-all cursor-pointer shadow-sm">
+                  <mat-icon class="text-sm text-emerald-400">table_chart</mat-icon>
+                  <span class="hidden sm:inline">Matriz de Pagos</span>
+                </button>
+                <button
+                  (click)="engine.startIntro()"
+                  class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold font-mono bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-400/50 text-cyan-300 transition-all cursor-pointer shadow-sm">
+                  <mat-icon class="text-sm text-cyan-400">play_circle</mat-icon>
+                  <span class="hidden sm:inline">Intro (3s)</span>
+                </button>
+                <button
+                  (click)="engine.coverBannerExpanded.set(false)"
+                  class="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-all shadow-[0_0_15px_rgba(0,229,255,0.4)] cursor-pointer">
+                  <span>Ir al Tablero</span>
+                  <mat-icon class="text-sm">arrow_downward</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Viewport Content -->
+  <main class="relative z-10 flex-1 flex flex-col items-center justify-start w-full max-w-5xl mx-auto px-2 sm:px-4 py-3 md:py-4">
+
+    <!-- Level Selector & Compact Mission Briefing Card -->
+    <section class="w-full mb-2 sm:mb-3">
+      <div class="rounded-xl sm:rounded-2xl bg-[#0d1424]/90 border border-slate-800 p-2.5 sm:p-4 backdrop-blur shadow-md">
+        
+        <!-- Level Tabs Selector & Targets KPI Strip -->
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-2 mb-2 border-b border-slate-800">
+          <!-- Level Tabs Selector -->
+          <div class="flex items-center gap-1.5 overflow-x-auto py-0.5 max-w-full">
+            <span class="text-[10px] sm:text-xs font-mono text-slate-400 shrink-0">FASES:</span>
+            @for (lvl of engine.allLevels; track lvl.id; let idx = $index) {
+              <button
+                (click)="selectLevel(idx)"
+                class="flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-lg text-[10px] sm:text-xs font-mono font-medium border transition-colors cursor-pointer whitespace-nowrap shrink-0"
+                [class.bg-cyan-950-60]="engine.currentLevelIndex() === idx"
+                [class.border-cyan-400]="engine.currentLevelIndex() === idx"
+                [class.text-cyan-300]="engine.currentLevelIndex() === idx"
+                [class.shadow-cyan]="engine.currentLevelIndex() === idx"
+                [class.bg-slate-900-60]="engine.currentLevelIndex() !== idx"
+                [class.border-slate-800]="engine.currentLevelIndex() !== idx"
+                [class.text-slate-400]="engine.currentLevelIndex() !== idx">
+                <mat-icon class="text-xs">{{ engine.currentLevelIndex() === idx ? 'play_arrow' : 'lock_open' }}</mat-icon>
+                <span>Nivel {{ lvl.id }}</span>
+              </button>
+            }
+          </div>
+
+          <!-- Mission Targets KPI Strip -->
+          <div class="flex items-center gap-2 shrink-0 font-mono text-[10px] sm:text-xs">
+            <div class="px-2 py-0.5 rounded-lg bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+              <span class="text-slate-400">SEGUROS:</span>
+              <span class="text-cyan-300 font-bold tabular-nums">
+                {{ engine.safeDeliveredCount() }}/{{ engine.currentLevel().packets.length - 1 }}
+              </span>
+            </div>
+
+            <div class="px-2 py-0.5 rounded-lg bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+              <span class="text-slate-400">CUARENTENA:</span>
+              <span class="text-rose-400 font-bold tabular-nums">
+                {{ engine.threatsQuarantinedCount() }}/1
+              </span>
+            </div>
+
+            <!-- Toggle Briefing Details Button -->
+            <button
+              (click)="engine.briefingExpanded.set(!engine.briefingExpanded())"
+              class="flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] text-slate-400 hover:text-cyan-300 border border-slate-800 hover:border-slate-700 transition-colors cursor-pointer"
+              [title]="engine.briefingExpanded() ? 'Ocultar detalles' : 'Ver misión completa'">
+              <span>{{ engine.briefingExpanded() ? 'Ocultar' : 'Misión' }}</span>
+              <mat-icon class="text-xs">{{ engine.briefingExpanded() ? 'expand_less' : 'expand_more' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Compact Mission Name -->
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2 min-w-0">
+            <h1 class="text-sm sm:text-base font-bold text-white tracking-tight truncate">
+              {{ engine.currentLevel().title }}
+            </h1>
+            <span class="text-[9px] font-mono text-cyan-400 uppercase bg-cyan-950/60 border border-cyan-500/30 px-1.5 py-0.2 rounded shrink-0">
+              {{ engine.currentLevel().codename }}
+            </span>
+          </div>
+
+          <span class="text-[10px] font-mono text-slate-400 shrink-0 hidden sm:inline">
+            Tablero 5×5 y Flechas Tácticas
+          </span>
+        </div>
+
+        <!-- Optional Full Briefing Details (Collapsible) -->
+        @if (engine.briefingExpanded()) {
+          <div class="mt-2.5 pt-2 border-t border-slate-800/80 animate-fadeIn space-y-2">
+            <p class="text-xs text-slate-300 leading-relaxed">
+              {{ engine.currentLevel().briefing }}
+            </p>
+
+            <div class="flex flex-wrap items-center gap-3 text-xs font-mono bg-slate-950/50 p-2 rounded-lg border border-slate-800">
+              <div class="flex items-center gap-1.5 text-cyan-300">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(0,229,255,0.8)] shrink-0"></span>
+                <span><strong>Objetivo 1:</strong> Inversiones y bonos legítimos (cian) a la <strong>Bóveda Central</strong>.</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-rose-300">
+                <span class="w-2 h-2 rounded-full bg-rose-500 shadow-[0_0_6px_rgba(255,0,85,0.8)] shrink-0"></span>
+                <span><strong>Objetivo 2:</strong> Derivados tóxicos y ataques especulativos (rojo) a <strong>Cuarentena</strong>.</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-emerald-300">
+                <mat-icon class="text-xs text-emerald-400 shrink-0">table_chart</mat-icon>
+                <span><strong>Equilibrio de Nash:</strong> Resuelve el laberinto 5×5 para el Óptimo de Pareto.</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Interactive Network Grid (Cyber Maze) -->
+    <app-cyber-grid></app-cyber-grid>
+
+    <!-- Tactical Toolbar (Power-ups & Stream Controls) -->
+    <app-tactical-toolbar></app-tactical-toolbar>
+
+    <!-- Real-time SIEM Audit Feed -->
+    <app-security-feed></app-security-feed>
+  </main>
+
+  <!-- Interactive Modals -->
+  <app-packet-inspector></app-packet-inspector>
+  <app-knowledge-card-modal></app-knowledge-card-modal>
+  <app-unity-hub-modal></app-unity-hub-modal>
+  <app-threat-encyclopedia-modal></app-threat-encyclopedia-modal>
+  <app-defeat-modal></app-defeat-modal>
+  <app-rules-modal></app-rules-modal>
+  <app-maze-challenge-modal></app-maze-challenge-modal>
+  <app-trivia-modal></app-trivia-modal>
+
+  <!-- MODAL DE VICTORIA Y TRANSICIÓN INMEDIATA DE NIVEL -->
+  <!-- MODAL DE VICTORIA O RIESGO CON TRANSICIÓN INMEDIATA Y CAMBIO DE TABLERO -->
+  @if (engine.levelCompleted() || engine.isTransitioningToNext()) {
+    <div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 select-none animate-fadeIn">
+      <div class="relative w-full max-w-lg rounded-2xl bg-gradient-to-b from-[#0a1e2f] via-[#0b1724] to-[#07111c] border-2 p-6 md:p-8 text-center flex flex-col items-center"
+        [class.border-emerald-400]="!engine.isRiskTransition()"
+        [class.shadow-[0_0_60px_rgba(16,185,129,0.45)]]="!engine.isRiskTransition()"
+        [class.border-amber-400]="engine.isRiskTransition()"
+        [class.shadow-[0_0_60px_rgba(245,158,11,0.45)]]="engine.isRiskTransition()">
+        
+        <!-- Icono holográfico animado -->
+        <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl border-2 flex items-center justify-center mb-4 animate-bounce"
+          [class.bg-emerald-950-90]="!engine.isRiskTransition()"
+          [class.border-emerald-400]="!engine.isRiskTransition()"
+          [class.shadow-[0_0_30px_rgba(16,185,129,0.5)]]="!engine.isRiskTransition()"
+          [class.bg-amber-950-90]="engine.isRiskTransition()"
+          [class.border-amber-400]="engine.isRiskTransition()"
+          [class.shadow-[0_0_30px_rgba(245,158,11,0.5)]]="engine.isRiskTransition()">
+          <mat-icon class="text-3xl md:text-4xl"
+            [class.text-emerald-300]="!engine.isRiskTransition()"
+            [class.text-amber-300]="engine.isRiskTransition()">
+            {{ engine.isRiskTransition() ? 'warning' : 'verified' }}
+          </mat-icon>
+        </div>
+
+        <span class="text-[11px] font-mono font-bold tracking-widest uppercase px-3 py-1 rounded-full border mb-2"
+          [class.text-emerald-400]="!engine.isRiskTransition()"
+          [class.bg-emerald-950-80]="!engine.isRiskTransition()"
+          [class.border-emerald-500-40]="!engine.isRiskTransition()"
+          [class.text-amber-400]="engine.isRiskTransition()"
+          [class.bg-amber-950-80]="engine.isRiskTransition()"
+          [class.border-amber-500-40]="engine.isRiskTransition()">
+          {{ engine.isRiskTransition() ? 'ALERTA DE RIESGO · CAMBIO DE TABLERO' : ('FASE ' + engine.currentLevel().id + ' PURGADA CON ÉXITO') }}
+        </span>
+
+        <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight mb-2">
+          {{ engine.transitionMessage() }}
+        </h2>
+
+        <p class="text-xs sm:text-sm text-slate-300 font-mono mb-6 max-w-md">
+          {{ engine.transitionSubtext() }}
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center gap-3 w-full justify-center">
+          <button
+            (click)="engine.nextLevel()"
+            class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold font-mono text-xs sm:text-sm uppercase tracking-wide text-slate-950 shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2"
+            [class.bg-gradient-to-r]="true"
+            [class.from-emerald-400]="!engine.isRiskTransition()"
+            [class.via-teal-400]="!engine.isRiskTransition()"
+            [class.to-cyan-400]="!engine.isRiskTransition()"
+            [class.from-amber-400]="engine.isRiskTransition()"
+            [class.via-orange-400]="engine.isRiskTransition()"
+            [class.to-yellow-400]="engine.isRiskTransition()">
+            <span>IR AL SIGUIENTE NIVEL AHORA (CAMBIAR TABLERO)</span>
+            <mat-icon class="text-base">arrow_forward</mat-icon>
+          </button>
+        </div>
+
+        <span class="text-[11px] font-mono text-cyan-300 mt-3 animate-pulse">
+          Cambiando tablero y cargando siguiente fase...
+        </span>
+      </div>
+    </div>
+  }
+
+  <!-- Full-Screen Cover Art Modal -->
+  @if (engine.showingCoverModal()) {
+    <div class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 select-none animate-fadeIn">
+      <div class="relative w-full max-w-4xl rounded-2xl bg-[#0d1424] border border-cyan-500/40 p-4 md:p-6 shadow-[0_0_50px_rgba(0,229,255,0.25)] flex flex-col max-h-[92vh]">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800 shrink-0">
+          <div class="flex items-center gap-2">
+            <mat-icon class="text-cyan-400 text-lg">image</mat-icon>
+            <h3 class="text-sm font-bold text-white font-mono uppercase tracking-wider">
+              Portada Oficial · CIFRA FLOW FINANCIERO: TEORÍA DE JUEGOS
+            </h3>
+          </div>
+          <button 
+            (click)="engine.showingCoverModal.set(false)"
+            class="p-1.5 rounded-lg border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            title="Cerrar Portada">
+            <mat-icon class="text-base">close</mat-icon>
+          </button>
+        </div>
+
+        <div class="flex-1 overflow-hidden my-3 rounded-xl border border-cyan-500/20 shadow-inner flex items-center justify-center bg-black">
+          <img 
+            src="/assets/images/cifraflow_financiero_cover.jpg" 
+            alt="Arte de Portada CIFRA FLOW FINANCIERO"
+            referrerpolicy="no-referrer"
+            class="w-full h-full object-contain max-h-[70vh]"
+          />
+        </div>
+
+        <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-400 shrink-0">
+          <span>Identidad Visual: Estratega de Mercados de Capitales & Bucle Infinito Criptofinanciero</span>
+          <button
+            (click)="engine.showingCoverModal.set(false)"
+            class="px-5 py-2 rounded-xl text-xs font-bold bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-colors cursor-pointer font-mono">
+            Volver a la Consola
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Modal de Matriz de Teoría de Juegos (Nash & Dilema del Prisionero) -->
+  <app-nash-matrix-modal></app-nash-matrix-modal>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-slate-800/80 bg-[#090d16] py-4 px-6 text-center text-xs text-slate-500 font-mono">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <span>CIFRA FLOW FINANCIERO · Teoría de Juegos y Ciberfinanzas Estratégicas</span>
+      <div class="flex items-center gap-4 text-slate-400">
+        <span>Matriz de Pagos de Nash</span>
+        <span aria-hidden="true">·</span>
+        <span>Flujos de Capital 5×5</span>
+      </div>
+    </div>
+  </footer>
+</div>

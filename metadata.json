@@ -1,0 +1,6 @@
+{
+  "name": "Phishing Escape: Cyber Maze",
+  "description": "High-fidelity cybersecurity puzzle game where analysts untangle corporate network data streams, routing verified packets to safety while quarantining phishing threats.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
